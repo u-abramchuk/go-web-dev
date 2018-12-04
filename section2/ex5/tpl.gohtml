@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+<table>
+    <thead>
+        <th>Date</th>
+        <th>Open</th>
+    <thead>
+    {{range .}}
+    <tr>
+        <td>{{.Date.Format "2006-01-02"}}</td>
+        <td>{{.Open}}</td>
+    </tr>
+    {{end}}
+</table>
+</body>
+</html>
