@@ -1,0 +1,36 @@
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"io"
+	"log"
+	"net"
+)
+
+func main() {
+	listener, err := net.Listen("tcp", ":8887")
+	if err != nil {
+		log.Fatalln(err)
+	}
+	defer listener.Close()
+
+	for {
+		connection, err := listener.Accept()
+		if err != nil {
+			log.Fatalln(err)
+			continue
+		}
+
+		scanner := bufio.NewScanner(connection)
+
+		for scanner.Scan() {
+			fmt.Println(scanner.Text())
+		}
+
+		fmt.Println("Code got here.")
+		io.WriteString(connection, "I see you connected.")
+
+		connection.Close()
+	}
+}
