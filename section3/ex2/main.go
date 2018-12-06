@@ -19,10 +19,10 @@ func main() {
 	defer listener.Close()
 
 	addHandler("GET", "/", func(connection net.Conn) {
-		textRespone(connection, "This is root")
+		textResponse(connection, "This is root")
 	})
 	addHandler("GET", "/what", func(connection net.Conn) {
-		textRespone(connection, "What am I looking for?")
+		textResponse(connection, "What am I looking for?")
 	})
 
 	for {
@@ -90,7 +90,7 @@ func notFound(connection net.Conn) {
 	fmt.Fprint(connection, "\r\n")
 }
 
-func textRespone(connection net.Conn, text string) {
+func textResponse(connection net.Conn, text string) {
 	body := `<!DOCTYPE html><html lang="en"><head><meta charet="UTF-8"><title></title></head><body><strong>` + html.EscapeString(text) + `</strong></body></html>`
 
 	fmt.Fprint(connection, "HTTP/1.1 200 OK\r\n")
